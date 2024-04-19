@@ -1,0 +1,386 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
+*,
+*:before,
+*:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* Estilos generales */
+body {
+  font-family: Arial, sans-serif;
+  background-image: url('./images/fondos/fondo_inicio_tarot_1.jpg');
+  background-size: cover;
+  background-position: center;
+  color: #faf4f4;
+  text-align: center;
+  
+}
+
+div {
+  text-align: center;
+  font-size: 20px;
+  color: #fff;
+  margin-top: 20px;
+
+}
+
+/*  Estos estilos son para las imagenes de las cartas del barajeo*/
+
+#tarotImgContainer {
+ /* z-index: 9999;*/
+  width: 100%;
+  height: 70%;
+  margin: auto;
+  position: absolute;
+  left: 0; right: 0; top: 0; bottom: 0;
+  overflow-x: hidden;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  transform: scale(.9);
+}
+
+
+#card {
+  width: 100%;
+    margin: auto;
+  position: absolute;
+  left: 0; right: 0; top: 0; bottom: 0;
+
+}
+
+
+.tarot-card {
+  width: 300px;
+  height: 500px;
+  margin: auto;
+  position: absolute;
+  left: 0; right: 0; top: 0; bottom: 0;
+  box-shadow: 0px 2px 30px #000;
+  cursor: pointer;
+    border-radius: 10px;
+  border: .3em solid #fff;
+  z-index: 100;
+  background-color: #fff;
+}
+
+.tarot-card:nth-child(1) {
+  transform: rotate(-3deg);
+}
+
+.tarot-card:nth-child(2) {
+  transform: rotate(4deg);
+}
+
+.tarot-card:nth-child(3) {
+  transform: rotate(10deg);
+}
+
+.tarot-card:nth-child(4) {
+  transform: rotate(4deg);
+}
+
+/*Estilos al extender cartas*/
+
+#root {
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  position: absolute;
+  left: 28%; right: 0; top: 35%; bottom: 0;
+  overflow-x: hidden;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  transform: scale(.9);
+  
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  transition: top .2s;
+  -webkit-transition: top .2s;
+  position: relative;
+  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  cursor: pointer;
+  margin: auto;
+  left: 0; right: 0; top: 0; bottom: 0;
+  border-radius: 10px;
+  border: .3em solid #fff;
+  background-color: #fff;
+  transform: translateY(20%);
+
+}
+.card:hover {
+  top: -70px;
+}
+.card.flipped {
+  top: -400px;
+}
+
+.card img{
+  padding: 1.5%;
+}
+
+.card-cont {
+  position: absolute;
+  width: 240px;
+  height: 400px;
+}
+
+
+
+
+/*Estilos al seleccionar carta*/
+
+#chosenCardContainer{
+  width: 100%;
+  height: 70%;
+  margin: auto;
+  position: absolute;
+  left: 0; right: 0; top: 8%; bottom: 0;
+  overflow-x: hidden;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  transform: scale(.9);
+}
+
+
+.chosen-card {
+  width: 300px;
+  height: 500px;
+  margin: auto;
+  position: absolute;
+  left: 0; right: 0; top: 0; bottom: 0;
+  box-shadow: 0px 2px 30px #000;
+  cursor: pointer;
+    border-radius: 10px;
+  border: .3em solid #fff;
+  z-index: 100;
+  background-color: #fff;
+}
+
+#chosenCard{
+  width: 100%;
+    margin: auto;
+  position: absolute;
+  left: 0; right: 0; top: 0; bottom: 0;
+}
+
+
+
+
+#div-card-lis{
+  margin-top: 20px;
+
+}
+
+#div-card-meaning{
+  margin-top: 500px;
+}
+
+
+
+/* Animación para la imagen de fondo */
+@keyframes moveBackground {
+  from {
+    background-position: center;
+  }
+
+  to {
+    background-position:  right 100%;
+  }
+}
+
+/* Estilos para animar la imagen de fondo */
+body {
+  animation: moveBackground 150s linear infinite;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 40px;
+  color: #fff;
+}
+
+h2 {
+  margin-top: 20px;
+  text-align: center;
+  color: #fff;
+}
+h3{
+  margin-top: 30px;
+  text-align: center;
+  color: #fff;
+  
+}
+
+p {
+  font-size: 18px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #fff;
+
+}
+
+ol {
+  list-style-type: none;
+  margin-left: 0;
+  padding-left: 0;
+  text-align: center;
+}
+
+li, .list-card {
+  font-size: 16px;
+  line-height: 1.4;
+  margin-bottom: 10px;
+  text-align: center;
+  color: #fff;
+}
+
+
+
+/* Estilos para los botónes */
+
+.button-container {
+  text-align: center;
+  white-space: nowrap; /* Evita el salto de línea */
+  margin-top: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 20px;
+  color: #fff;
+  background-color: #333;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 30px;
+  white-space: normal; /* Restaura el comportamiento predeterminado de salto de línea */
+}
+
+
+/* Estilos para la ventana modal o emergente */
+
+#exampleModal{
+  background-color: rgba(0, 0, 0, 0.5);
+
+}
+.modal {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+#modal-header{
+  display: flex;
+  border-bottom: none;
+  padding: 0%;
+}
+
+
+.modal-dialog{
+  background-color: rgba(0, 0, 0, 0.5);
+
+}
+
+#modal-content {
+background-color:rgba(0, 0, 0, 0.3) ;
+
+}
+.modal-title {
+  color: #fff;
+  text-align: center;
+  flex-grow: 5;
+}
+
+.imagen-significado{
+  border: none;
+  border-radius: 4px;
+  align-items: center;
+  text-align: center;
+}
+
+.modal-body label{
+  color: #fff;
+  
+}
+
+input[type="radio"] {
+  margin-right: 5px;
+  color: #fff;
+}
+
+#texto-seleccionado {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #fff;
+}
+
+#modal-footer{
+border-top: none;
+
+}
+
+
+/* Estilos para la listas de cartas*/
+
+.card-image {
+
+  width: 200px;
+  height: 300px;
+  margin: auto;
+  left: 0; right: 0; top: 0; bottom: 0;
+  box-shadow: 0px 2px 30px #000;
+  cursor: pointer;
+    border-radius: 10px;
+  border: .3em solid #fff;
+  z-index: 100;
+  background-color: #fff;
+}
+
+.card-list {
+  columns: 5;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card-list li, .list-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.card-list li img {
+  margin-bottom: 10px;
+} 
+/* Estilos para dispositivos móviles */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 36px;
+  }
+
+  p {
+    font-size: 16px;
+  }
+
+  button {
+    font-size: 18px;
+  }
+
+
+}

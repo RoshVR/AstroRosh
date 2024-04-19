@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "astrorosh",
+  "private_key_id": "6bf4062d03946a15318ec3c6c3d7a9a1f9ff631e",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCyW5GO/S/28QqE\nuTQN7q7oM2aR0FzUpyyeCa47L4TcFiRHRSCUcewtOEPeRdl8VXbYafGhYwgCiU8W\nZNwxdJX2xdlIKmoie1gQdngDmcck6scdXkGx/xKvqT/CgRl1zSaQOclnqejHD4n1\n1ComZNnAOwm6UI159ND6bkFmCXyYJAKewP0dXr7pk8ipxI4CPuMjpwDvi/8zdypA\n5oMajxP0bjfFrVmgzByt1E3rXwzb7cJVU6EeX68cAk0qdDs0oiYtcn5NJ5Uvs//w\nqnv2ZmAP3ZD9Wp80YLA+hOsETHusdqstJxzw92VediaRl37DZJete5yJvdMQGHHc\nrlf+IJAXAgMBAAECggEABVeezYSh6iigIweVGpG6pXPcr6NpFGmJeZZapKUwupLj\nNUtJxYiABX648bBv6jx5GdRai3X26HSKbOZKfiS61TBp6LJ0iWHeamfSAnGZuG5b\n1nJbT2SPf7l3EnFhfNjPPeStNrCtK0E45accOBgvOYXLLcx54FxH4ihpRxAjrj7h\nDr+fsd0Wihst2bnIjY4XTXcr4FgJnNrbmk7D3FGU/zMHv82GYf71w+uECHih32Ym\n8I8/7+AGykNo5d1O7ag4LwkM0d/gwj0pcVSTfQdxVi1XqD6FBlyqSrHpIAA3FN8x\n8el21OUnPG124Ty0EtJ1EEwexYAGJpOoYcorEjbyKQKBgQDiYhZRpF30Z1ThboiG\nOYf87XBTiVGsCCvqAw9Wv4pCP/Tyzbwktgy/mc0cfLaMciusPucubkXaxCMf5JL5\nPl1soyJFy+2enFcVOOT3sf96EVFDpdG0UtW2HiOWhlO/LtXHtziIfLvdyt01cWLW\nHNlbIapM6BiO5b8p0nF3hhgbfQKBgQDJsQlKpJbX6ntrnNS1DuxBsFkxLeabCl5c\npmIr0q4NuSo+/cZoO0w9iLXzv7Amr2UwNS0iE5xJJ7k0q7SNmxc7RIMZvLvm6S9Q\nYCG99ghulf+9KNL08DCEDltaw2/sNd2N5WGjJNAu0flG2Ih5PgOfTO9MB4ZGCxMf\n8ejHYTVmIwKBgCGCjXU2VGYKKalY+EKOH5AUAY2MBRfm+cEhBNM9dRTLbNHIHHJ+\ntDJkbNUrrMXrXIWZphTcY+C3Kc/dwNe+IIwlNbyJLDpPQCC3FEWKBpwmFhZiZEFC\nBbp4iaINbjYdk62FdIvXkuOI1OfFSfERwibYO+I4dPIqFfr12K/tnIHtAoGAd2FR\ndZv8KOsCiIy4nj6p+qut710S3PwDJGXbP8MhAMBzz/sX4AQROW7c+9yfIBa7FxCy\nmTPwUqCvkAx9/z8oPg1sZ+R9d8zYE4QDFNQ243XnfIhYbWBp5xA0ZIG/kpnDfMSj\nyRP2IXBpUtTB2rmpHTZFgcQGZxkRBdyDAth36e8CgYEAtZLS3U8fLrrDF1Kni+V3\nul1g89/DZ1TsogAf9PsZ7Bleivk9dN1eoEuadBoIWLk0rmviG5Di/P9nxU9F9iq5\npnYNfDBbGpSO46vBQ7/YSj3mP585RcnX9mBPQb5DfEkc02ddcyb9+vcI67Y9Us7e\n7JWnjNUG8angr/I/Z2wh3xg=\n-----END PRIVATE KEY-----\n",
+  "client_email": "astrorosh-admin@astrorosh.iam.gserviceaccount.com",
+  "client_id": "112069502272701859542",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/astrorosh-admin%40astrorosh.iam.gserviceaccount.com"
+}

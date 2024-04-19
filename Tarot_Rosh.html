@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles_tarot.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <title>Tarot - AstroRosh</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+
+<body >
+  <h1>Tarot</h1>
+  <p>Ofrecemos lecturas de Tarot personalizadas y detalladas para ayudarlo a comprender su presente y futuro. Elija una
+    de las opciones a continuación para comenzar su lectura:</p>
+    <br>
+  <div class="button-container">
+  <button id="barajear" onclick="barajearCartas()">Barajar Cartas</button>
+  <button id="extendCards" onclick="spreadCards()">Extender Cartas</button>
+  <button id="selectCard" onclick="showCard()">Sacar Carta</button>
+</div>
+  <br>
+
+  
+  <div id="root"></div>
+  
+  <h3 id="card-name"></h3>
+<div id="tarotImgContainer" >
+  <div  class="tarot-card">
+      <img id="card" src="./images/cartas/trasera_rider.jpg" alt="Carta de Tarot" >
+  </div>
+  <div  class="tarot-card">
+    <img id="card" src="./images/cartas/trasera_rider.jpg" alt="Carta de Tarot" >
+  </div>
+  <div  class="tarot-card">
+      <img id="card" src="./images/cartas/trasera_rider.jpg" alt="Carta de Tarot" >
+  </div>
+  <div  class="tarot-card">
+        <img id="card" src="./images/cartas/trasera_rider.jpg" alt="Carta de Tarot" >
+   </div>
+</div>
+
+<div id="chosenCardContainer">
+    <div id="divChosenCard" class="chosen-card">
+        <img id="chosenCard"  alt="Carta Elegida" >
+     </div>
+</div>
+
+<br>
+
+<div  id="div-card-meaning">
+  <p id="card-meaning"></p>
+</div>
+<br>
+  
+  <div class="modal" tabindex="-1" id="exampleModal">
+    <div class="modal-dialog">
+      <div id= "modal-content"class="modal-content">
+        <div id= "modal-header" class="modal-header">
+          <h5 class="modal-title" id="modal-title"></h5>
+          <button type="button" id= "btn-close"  class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div>
+        <img id="image-signidicado" class="card-image">
+      </div>
+        <div class="modal-body">
+           <label><input type="radio" id="opcion1">Significado 1</label>
+           <label><input type="radio" id="opcion2">Significado 2</label>
+           <label><input type="radio" id="opcion3">Significado 3</label>
+          
+            <div id="texto-seleccionado"></div>
+
+          </div>
+        <div id="modal-footer" class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+      </div>
+    </div>
+  </div>
+
+ 
+<div id="div-card-lis">
+  <h2>Significados de las Cartas</h2>
+  
+  <label for="filtro-cartas">Filtrar Cartas:</label>
+  <select id="filtro-cartas" onchange="filtrarCartas()">
+    <option value="todas">Mostrar Todas</option>
+    <option value="arcanos-mayores">Arcanos Mayores</option>
+    <option value="arcanos-menores">Arcanos Menores</option>
+    <optgroup label="Palos">
+        <option value="oros">Oros</option>
+        <option value="copas">Copas</option>
+        <option value="espadas">Espadas</option>
+        <option value="bastos">Bastos</option>
+    </optgroup>
+    <option value="figuras-corte">Figuras de la Corte</option>
+</select>
+
+
+    <ol class="card-list">
+      <li class="list-card arcanos-mayores"><img class="card-image" src="./images/cartas/el_loco.jpg" alt="EL LOCO" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="EL LOCO" data-img="./images/cartas/el_loco.jpg" data-text="<p><b>POSITIVO: </b>Libertad, Espontaneidad, Aventura</p><p><b>NEGATIVO: </b>Irresponsabilidad, Caos, Inestabilidad</p>">EL LOCO</li>
+      <li class="list-card arcanos-mayores"><img class="card-image" src="./images/cartas/el_mago.jpg" alt="EL MAGO" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="EL MAGO" data-img="./images/cartas/el_mago.jpg" data-text="<p><b>POSITIVO: </b>Habilidad, Poder, Voluntad</p><p><b>NEGATIVO: </b>Manipulación, Arrogancia, Engaño</p>">EL MAGO</li>
+      <li class="list-card arcanos-mayores"><img class="card-image" src="./images/cartas/la_sacerdotisa.jpg" alt="LA SACERDOTISA" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="LA SACERDOTISA" data-img="./images/cartas/la_sacerdotisa.jpg" data-text="<p><b>POSITIVO: </b>Sabiduría, Intuición, Misterio</p><p><b>NEGATIVO: </b>Secretismo, Pasividad, Indecisión</p>">LA SACERDOTISA</li>
+      <li class="list-card arcanos-mayores"><img class="card-image" src="./images/cartas/la_emperatriz.jpg" alt="LA EMPERATRIZ" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="LA EMPERATRIZ" data-img="./images/cartas/la_emperatriz.jpg" data-text="<p><b>POSITIVO: </b>Fertilidad, Abundancia, Crianza</p><p><b>NEGATIVO: </b>Control, Excesos, Dependencia</p>">LA EMPERATRIZ</li>
+      <li class="list-card arcanos-mayores"><img class="card-image" src="./images/cartas/el_emperador.jpg" alt="EL EMPERADOR" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="EL EMPERADOR" data-img="./images/cartas/el_emperador.jpg" data-text="<p><b>POSITIVO: </b>Liderazgo, Autoridad, Estructura</p><p><b>NEGATIVO: </b>Control, Dominación, Rigidez</p>">EL EMPERADOR</li>
+      <li class="list-card arcanos-mayores"><img class="card-image" src="./images/cartas/el_sumo_sacerdote.jpg" alt="EL SUMO SACERDOTE" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="EL SUMO SACERDOTE" data-img="./images/cartas/el_sumo_sacerdote.jpg" data-text="<p><b>POSITIVO: </b>Espiritualidad, Tradición, Enseñanza</p><p><b>NEGATIVO: </b>Dogmatismo, Conservadurismo, Intolerancia</p>">EL SUMO SACERDOTE</li>
+      <li class="list-card arcanos-mayores"><img class="card-image" src="./images/cartas/los_enamorados.jpg" alt="LOS ENAMORADOS" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="LOS ENAMORADOS" data-img="./images/cartas/los_enamorados.jpg" data-text="<p><b>POSITIVO: </b>Elección, Deseo, Unión</p><p><b>NEGATIVO: </b>Indecisión, Conflicto, Tentación</p>">LOS ENAMORADOS</li>
+      <li class="list-card arcanos-mayores"><img class="card-image" src="./images/cartas/el_carro.jpg" alt="EL CARRO" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="EL CARRO" data-img="./images/cartas/el_carro.jpg" data-text="<p><b>POSITIVO: </b>Control, Victoria, Acción</p><p><b>NEGATIVO: </b>Egoísmo, Descontrol, Agresión</p>">EL CARRO</li>
+      <li class="list-card arcanos-mayores"><img class="card-image" src="./images/cartas/la_fuerza.jpg" alt="LA FUERZA" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="LA FUERZA" data-img="./images/cartas/la_fuerza.jpg" data-text="<p><b>POSITIVO: </b>Equidad, Justicia, Equilibrio</p><p><b>NEGATIVO: </b>Rigidez, Falta de Empatía, Crueldad</p>">LA FUERZA</li>
+      <li class="list-card arcanos-mayores"><img class="card-image" src="./images/cartas/el_ermitano.jpg" alt="EL ERMITANO" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="EL ERMITANO" data-img="./images/cartas/el_ermitano.jpg" data-text="<p><b>POSITIVO: </b>Reflexión, Sabiduría, Soledad</p><p><b>NEGATIVO: </b>Aislamiento, Depresión, Soledad</p>">EL ERMITANO</li>
+      <li class="list-card arcanos-mayores"><img class="card-image" src="./images/cartas/la_rueda_de_la_fortuna.jpg" alt="LA RUEDA DE LA FORTUNA" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="LA RUEDA DE LA FORTUNA" data-img="./images/cartas/la_rueda_de_la_fortuna.jpg" data-text="<p><b>POSITIVO: </b>Cambio, Suerte, Destino</p><p><b>NEGATIVO: </b>Falta de Control, Ciclos de la Vida, Volatilidad</p>">LA RUEDA DE LA FORTUNA</li>
+      <li class="list-card arcanos-mayores"><img class="card-image" src="./images/cartas/la_justicia.jpg" alt="LA JUSTICIA" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="LA JUSTICIA" data-img="./images/cartas/la_justicia.jpg" data-text="<p><b>POSITIVO: </b>Coraje, Dominio, Éxito</p><p><b>NEGATIVO: </b>Agresividad, Falta de Control, Arrogancia</p>">LA JUSTICIA</li>
+      <li class="list-card arcanos-mayores"><img class="card-image" src="./images/cartas/el_colgado.jpg" alt="EL COLGADO" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="EL COLGADO" data-img="./images/cartas/el_colgado.jpg" data-text="<p><b>POSITIVO: </b>Sacrificio, Renuncia, Iluminación</p><p><b>NEGATIVO: </b>Pasividad, Dolor, Estancamiento</p>">EL COLGADO</li>
+      <li class="list-card arcanos-mayores"><img class="card-image" src="./images/cartas/la_muerte.jpg" alt="LA MUERTE" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="LA MUERTE" data-img="./images/cartas/la_muerte.jpg" data-text="<p><b>POSITIVO: </b>Transformación, Renacimiento, Cambio</p><p><b>NEGATIVO: </b>Pérdida, Dolor, Resistencia al Cambio</p>">LA MUERTE</li>
+      <li class="list-card arcanos-mayores"><img class="card-image" src="./images/cartas/la_templanza.jpg" alt="LA TEMPLANZA" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="LA TEMPLANZA" data-img="./images/cartas/la_templanza.jpg" data-text="<p><b>POSITIVO: </b>Equilibrio, Armonía, Moderación</p><p><b>NEGATIVO: </b>Extremismo, Desajuste, Desorden</p>">LA TEMPLANZA</li>
+      <li class="list-card arcanos-mayores"><img class="card-image" src="./images/cartas/el_diablo.jpg" alt="EL DIABLO" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="EL DIABLO" data-img="./images/cartas/el_diablo.jpg" data-text="<p><b>POSITIVO: </b>Materialismo, Deseo, Liberación</p><p><b>NEGATIVO: </b>Esclavitud, Adicción, Engaño</p>">EL DIABLO</li>
+      <li class="list-card arcanos-mayores"><img class="card-image" src="./images/cartas/la_torre.jpg" alt="LA TORRE" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="LA TORRE" data-img="./images/cartas/la_torre.jpg" data-text="<p><b>POSITIVO: </b>Cambio Dramático, Destrucción, Iluminación</p><p><b>NEGATIVO: </b>Caída, Caos, Trauma</p>">LA TORRE</li>
+      <li class="list-card arcanos-mayores"><img class="card-image" src="./images/cartas/la_estrella.jpg" alt="LA ESTRELLA" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="LA ESTRELLA" data-img="./images/cartas/la_estrella.jpg" data-text="<p><b>POSITIVO: </b>Esperanza, Inspiración, Espiritualidad</p><p><b>NEGATIVO: </b>Desilusión, Falta de Fe, Pesimismo</p>">LA ESTRELLA</li>
+      <li class="list-card arcanos-mayores"><img class="card-image" src="./images/cartas/la_luna.jpg" alt="LA LUNA" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="LA LUNA" data-img="./images/cartas/la_luna.jpg" data-text="<p><b>POSITIVO: </b>Intuición, Misterio, Cambio</p><p><b>NEGATIVO: </b>Confusión, Engaño, Inestabilidad</p>">LA LUNA</li>
+      <li class="list-card arcanos-mayores"><img class="card-image" src="./images/cartas/el_sol.jpg" alt="EL SOL" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="EL SOL" data-img="./images/cartas/el_sol.jpg" data-text="<p><b>POSITIVO: </b>Vitalidad, Alegría, Iluminación</p><p><b>NEGATIVO: </b>Arrogancia, Egoísmo, Falta de Realismo</p>">EL SOL</li>
+      <li class="list-card arcanos-mayores"><img class="card-image" src="./images/cartas/el_juicio.jpg" alt="EL JUICIO" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="EL JUICIO" data-img="./images/cartas/el_juicio.jpg" data-text="<p><b>POSITIVO: </b>Renacimiento, Redención, Evaluación</p><p><b>NEGATIVO: </b>Condena, Juicio, Crítica</p>">EL JUICIO</li>
+      <li class="list-card arcanos-mayores"><img class="card-image" src="./images/cartas/el_mundo.jpg" alt="EL MUNDO" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="EL MUNDO" data-img="./images/cartas/el_mundo.jpg" data-text="<p><b>POSITIVO: </b>Totalidad, Realización, Finalización</p><p><b>NEGATIVO: </b>Aislamiento, Incompletitud, Falta de Dirección</p>">EL MUNDO</li>
+      <li class="list-card arcanos-menores oros"><img class="card-image" src="./images/cartas/as_de_oros.jpg" alt="As de oros" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="As de oros" data-img="./images/cartas/as_de_oros.jpg" data-text="<p><b>POSITIVO: </b>Abundancia, Prosperidad, Nueva oportunidad</p><p><b>NEGATIVO: </b>Avaricia, Egoísmo, Pérdida de oportunidades</p>">As de oros</li>
+      <li class="list-card arcanos-menores oros"><img class="card-image" src="./images/cartas/dos_de_oros.jpg" alt="Dos de oros" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Dos de oros" data-img="./images/cartas/dos_de_oros.jpg" data-text="<p><b>POSITIVO: </b>Equilibrio, Flexibilidad, Adaptabilidad</p><p><b>NEGATIVO: </b>Cambios repentinos, Desorden, Incapacidad para decidir</p>">Dos de oros</li>
+      <li class="list-card arcanos-menores oros"><img class="card-image" src="./images/cartas/tres_de_oros.jpg" alt="Tres de oros" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Tres de oros" data-img="./images/cartas/tres_de_oros.jpg" data-text="<p><b>POSITIVO: </b>Trabajo en equipo, Colaboración, Reconocimiento</p><p><b>NEGATIVO: </b>Individualismo, Falta de apoyo, Malos resultados</p>">Tres de oros</li>
+      <li class="list-card arcanos-menores oros"><img class="card-image" src="./images/cartas/cuatro_de_oros.jpg" alt="Cuatro de oros" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Cuatro de oros" data-img="./images/cartas/cuatro_de_oros.jpg" data-text="<p><b>POSITIVO: </b>Estabilidad, Seguridad, Ahorro</p><p><b>NEGATIVO: </b>Avaricia, Aferramiento, Rigidez</p>">Cuatro de oros</li>
+      <li class="list-card arcanos-menores oros"><img class="card-image" src="./images/cartas/cinco_de_oros.jpg" alt="Cinco de oros" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Cinco de oros" data-img="./images/cartas/cinco_de_oros.jpg" data-text="<p><b>POSITIVO: </b>Pérdida, Abandono, Desolación</p><p><b>NEGATIVO: </b>Inseguridad, Pobreza, Pesimismo</p>">Cinco de oros</li>
+      <li class="list-card arcanos-menores oros"><img class="card-image" src="./images/cartas/seis_de_oros.jpg" alt="Seis de oros" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Seis de oros" data-img="./images/cartas/seis_de_oros.jpg" data-text="<p><b>POSITIVO: </b>Generosidad, Compartir, Caridad</p><p><b>NEGATIVO: </b>Avaricia, Desigualdad, Falta de reciprocidad</p>">Seis de oros</li>
+      <li class="list-card arcanos-menores oros"><img class="card-image" src="./images/cartas/siete_de_oros.jpg" alt="Siete de oros" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Siete de oros" data-img="./images/cartas/siete_de_oros.jpg" data-text="<p><b>POSITIVO: </b>Paciencia, Esfuerzo, Cosecha</p><p><b>NEGATIVO: </b>Falta de resultados, Impaciencia, Pérdida de tiempo</p>">Siete de oros</li>
+      <li class="list-card arcanos-menores oros"><img class="card-image" src="./images/cartas/ocho_de_oros.jpg" alt="Ocho de oros" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Ocho de oros" data-img="./images/cartas/ocho_de_oros.jpg" data-text="<p><b>POSITIVO: </b>Perfección, Maestría, Trabajo Duro</p><p><b>NEGATIVO: </b>Perfeccionismo excesivo, Rutina, Falta de creatividad</p>">Ocho de oros</li>
+      <li class="list-card arcanos-menores oros"><img class="card-image" src="./images/cartas/nueve_de_oros.jpg" alt="Nueve de oros" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Nueve de oros" data-img="./images/cartas/nueve_de_oros.jpg" data-text="<p><b>POSITIVO: </b>Independencia, Éxito, Abundancia</p><p><b>NEGATIVO: </b>Soledad, Aislamiento, Falta de confianza</p>">Nueve de oros</li>
+      <li class="list-card arcanos-menores oros"><img class="card-image" src="./images/cartas/diez_de_oros.jpg" alt="Diez de oros" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Diez de oros" data-img="./images/cartas/diez_de_oros.jpg" data-text="<p><b>POSITIVO: </b>Riqueza, Herencia, Familia</p><p><b>NEGATIVO: </b>Materialismo, Conflictos familiares, Apego a lo material</p>">Diez de oros</li>
+      <li class="list-card arcanos-menores oros figuras-corte"><img class="card-image" src="./images/cartas/page_de_oros.jpg" alt="Page de oros" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Page de oros" data-img="./images/cartas/page_de_oros.jpg" data-text="<p><b>POSITIVO: </b>Nuevo comienzo, Aprendizaje, Curiosidad</p><p><b>NEGATIVO: </b>Inmadurez, Falta de compromiso, Distracción</p>">Page de oros</li>
+      <li class="list-card arcanos-menores oros figuras-corte"><img class="card-image" src="./images/cartas/caballero_de_oros.jpg" alt="Caballero de oros" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Caballero de oros" data-img="./images/cartas/caballero_de_oros.jpg" data-text="<p><b>POSITIVO: </b>Responsabilidad, Determinación, Ambición</p><p><b>NEGATIVO: </b>Falta de flexibilidad, Terquedad, Impaciencia</p>">Caballero de oros</li>
+      <li class="list-card arcanos-menores oros figuras-corte"><img class="card-image" src="./images/cartas/reina_de_oros.jpg" alt="Reina de oros" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Reina de oros" data-img="./images/cartas/reina_de_oros.jpg" data-text="<p><b>POSITIVO: </b>Abundancia, Estabilidad, Prudencia</p><p><b>NEGATIVO: </b>Control, Rigidez, Materialismo</p>">Reina de oros</li>
+      <li class="list-card arcanos-menores oros figuras-corte"><img class="card-image" src="./images/cartas/rey_de_oros.jpg" alt="Rey de oros" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Rey de oros" data-img="./images/cartas/rey_de_oros.jpg" data-text="<p><b>POSITIVO: </b>Estabilidad, Liderazgo, Seguridad</p><p><b>NEGATIVO: </b>Avaricia, Falta de generosidad, Tirania</p>">Rey de oros</li>
+      <li class="list-card arcanos-menores bastos"><img class="card-image" src="./images/cartas/as_de_bastos.jpg" alt="As de bastos" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="As de bastos" data-img="./images/cartas/as_de_bastos.jpg" data-text="<p><b>POSITIVO: </b>Nuevas oportunidades, Potencial, Acción</p><p><b>NEGATIVO: </b>Impulsividad, Falta de planificación, Egoísmo</p>">As de bastos</li>
+      <li class="list-card arcanos-menores bastos"><img class="card-image" src="./images/cartas/dos_de_bastos.jpg" alt="Dos de bastos" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Dos de bastos" data-img="./images/cartas/dos_de_bastos.jpg" data-text="<p><b>POSITIVO: </b>Planificación, Decisión, Progreso</p><p><b>NEGATIVO: </b>Indecisión, Falta de visión, Estancamiento</p>">Dos de bastos</li>
+      <li class="list-card arcanos-menores bastos"><img class="card-image" src="./images/cartas/tres_de_bastos.jpg" alt="Tres de bastos" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Tres de bastos" data-img="./images/cartas/tres_de_bastos.jpg" data-text="<p><b>POSITIVO: </b>Expansión, Crecimiento, Colaboración</p><p><b>NEGATIVO: </b>Conflictos, Falta de colaboración, Estancamiento</p>">Tres de bastos</li>
+      <li class="list-card arcanos-menores bastos"><img class="card-image" src="./images/cartas/cuatro_de_bastos.jpg" alt="Cuatro de bastos" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Cuatro de bastos" data-img="./images/cartas/cuatro_de_bastos.jpg" data-text="<p><b>POSITIVO: </b>Celebración, Logro, Estabilidad</p><p><b>NEGATIVO: </b>Estancamiento, Interrupción, Conflictos</p>">Cuatro de bastos</li>
+      <li class="list-card arcanos-menores bastos"><img class="card-image" src="./images/cartas/cinco_de_bastos.jpg" alt="Cinco de bastos" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Cinco de bastos" data-img="./images/cartas/cinco_de_bastos.jpg" data-text="<p><b>POSITIVO: </b>Competencia, Desafío, Aprendizaje</p><p><b>NEGATIVO: </b>Confusión, Falta de dirección, Lucha innecesaria</p>">Cinco de bastos</li>
+      <li class="list-card arcanos-menores bastos"><img class="card-image" src="./images/cartas/seis_de_bastos.jpg" alt="Seis de bastos" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Seis de bastos" data-img="./images/cartas/seis_de_bastos.jpg" data-text="<p><b>POSITIVO: </b>Victoria, Reconocimiento, Confianza</p><p><b>NEGATIVO: </b>Vanidad, Falta de humildad, Derrota</p>">Seis de bastos</li>
+      <li class="list-card arcanos-menores bastos"><img class="card-image" src="./images/cartas/siete_de_bastos.jpg" alt="Siete de bastos" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Siete de bastos" data-img="./images/cartas/siete_de_bastos.jpg" data-text="<p><b>POSITIVO: </b>Determinación, Defensa, Persistencia</p><p><b>NEGATIVO: </b>Agotamiento, Falta de confianza, Derrota</p>">Siete de bastos</li>
+      <li class="list-card arcanos-menores bastos"><img class="card-image" src="./images/cartas/ocho_de_bastos.jpg" alt="Ocho de bastos" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Ocho de bastos" data-img="./images/cartas/ocho_de_bastos.jpg" data-text="<p><b>POSITIVO: </b>Movimiento, Acción, Velocidad</p><p><b>NEGATIVO: </b>Impaciencia, Falta de planificación, Obstáculos</p>">Ocho de bastos</li>
+      <li class="list-card arcanos-menores bastos"><img class="card-image" src="./images/cartas/nueve_de_bastos.jpg" alt="Nueve de bastos" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Nueve de bastos" data-img="./images/cartas/nueve_de_bastos.jpg" data-text="<p><b>POSITIVO: </b>Resistencia, Coraje, Resiliencia</p><p><b>NEGATIVO: </b>Agotamiento, Falta de fuerza, Derrota</p>">Nueve de bastos</li>
+      <li class="list-card arcanos-menores bastos"><img class="card-image" src="./images/cartas/diez_de_bastos.jpg" alt="Diez de bastos" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Diez de bastos" data-img="./images/cartas/diez_de_bastos.jpg" data-text="<p><b>POSITIVO: </b>Carga, Responsabilidad, Exceso</p><p><b>NEGATIVO: </b>Sobrecarga, Agotamiento, Falta de libertad</p>">Diez de bastos</li>
+      <li class="list-card arcanos-menores bastos figuras-corte"><img class="card-image" src="./images/cartas/page_de_bastos.jpg" alt="Page de bastos" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Page de bastos" data-img="./images/cartas/page_de_bastos.jpg" data-text="<p><b>POSITIVO: </b>Inspiración, Creatividad, Entusiasmo</p><p><b>NEGATIVO: </b>Impulsividad, Falta de planificación, Distraído</p>">Page de bastos</li>
+      <li class="list-card arcanos-menores bastos figuras-corte"><img class="card-image" src="./images/cartas/caballero_de_bastos.jpg" alt="Caballero de bastos" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Caballero de bastos" data-img="./images/cartas/caballero_de_bastos.jpg" data-text="<p><b>POSITIVO: </b>Acción, Movimiento, Aventura</p><p><b>NEGATIVO: </b>Impulsividad, Falta de planificación, Arrogancia</p>">Caballero de bastos</li>
+      <li class="list-card arcanos-menores bastos figuras-corte"><img class="card-image" src="./images/cartas/reina_de_bastos.jpg" alt="Reina de bastos" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Reina de bastos" data-img="./images/cartas/reina_de_bastos.jpg" data-text="<p><b>POSITIVO: </b>Independencia, Intuición, Carisma</p><p><b>NEGATIVO: </b>Control, Arrogancia, Egocentrismo</p>">Reina de bastos</li>
+      <li class="list-card arcanos-menores bastos figuras-corte"><img class="card-image" src="./images/cartas/rey_de_bastos.jpg" alt="Rey de bastos" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Rey de bastos" data-img="./images/cartas/rey_de_bastos.jpg" data-text="<p><b>POSITIVO: </b>Liderazgo, Pasión, Carisma</p><p><b>NEGATIVO: </b>Control, Arrogancia, Falta de empatía</p>">Rey de bastos</li>
+      <li class="list-card arcanos-menores espadas"><img class="card-image" src="./images/cartas/as_de_espadas.jpg" alt="As de espadas" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="As de espadas" data-img="./images/cartas/as_de_espadas.jpg" data-text="<p><b>POSITIVO: </b>Nueva claridad, Verdad, Claridad mental</p><p><b>NEGATIVO: </b>Dolor, Confusión, Engaño</p>">As de espadas</li>
+      <li class="list-card arcanos-menores espadas"><img class="card-image" src="./images/cartas/dos_de_espadas.jpg" alt="Dos de espadas" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Dos de espadas" data-img="./images/cartas/dos_de_espadas.jpg" data-text="<p><b>POSITIVO: </b>Elección, Equilibrio, Paz</p><p><b>NEGATIVO: </b>Indecisión, Falta de resolución, Conflicto interno</p>">Dos de espadas</li>
+      <li class="list-card arcanos-menores espadas"><img class="card-image" src="./images/cartas/tres_de_espadas.jpg" alt="Tres de espadas" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Tres de espadas" data-img="./images/cartas/tres_de_espadas.jpg" data-text="<p><b>POSITIVO: </b>Dolor, Traición, Desamor</p><p><b>NEGATIVO: </b>Dolor, Pérdida, Separación</p>">Tres de espadas</li>
+      <li class="list-card arcanos-menores espadas"><img class="card-image" src="./images/cartas/cuatro_de_espadas.jpg" alt="Cuatro de espadas" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Cuatro de espadas" data-img="./images/cartas/cuatro_de_espadas.jpg" data-text="<p><b>POSITIVO: </b>Descanso, Reflexión, Recuperación</p><p><b>NEGATIVO: </b>Aislamiento, Estancamiento, Falta de avance</p>">Cuatro de espadas</li>
+      <li class="list-card arcanos-menores espadas"><img class="card-image" src="./images/cartas/cinco_de_espadas.jpg" alt="Cinco de espadas" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Cinco de espadas" data-img="./images/cartas/cinco_de_espadas.jpg" data-text="<p><b>POSITIVO: </b>Engaño, Derrota, Traición</p><p><b>NEGATIVO: </b>Vergüenza, Pérdida, Humillación</p>">Cinco de espadas</li>
+      <li class="list-card arcanos-menores espadas"><img class="card-image" src="./images/cartas/seis_de_espadas.jpg" alt="Seis de espadas" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Seis de espadas" data-img="./images/cartas/seis_de_espadas.jpg" data-text="<p><b>POSITIVO: </b>Transición, Avance, Superación</p><p><b>NEGATIVO: </b>Dificultades, Miedo, Estancamiento</p>">Seis de espadas</li>
+      <li class="list-card arcanos-menores espadas"><img class="card-image" src="./images/cartas/siete_de_espadas.jpg" alt="Siete de espadas" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Siete de espadas" data-img="./images/cartas/siete_de_espadas.jpg" data-text="<p><b>POSITIVO: </b>Decepción, Mentira, Robo</p><p><b>NEGATIVO: </b>Culpa, Duda, Descubrimiento</p>">Siete de espadas</li>
+      <li class="list-card arcanos-menores espadas"><img class="card-image" src="./images/cartas/ocho_de_espadas.jpg" alt="Ocho de espadas" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Ocho de espadas" data-img="./images/cartas/ocho_de_espadas.jpg" data-text="<p><b>POSITIVO: </b>Encierro, Opresión, Autolimitación</p><p><b>NEGATIVO: </b>Miedo, Falta de visión, Estancamiento</p>">Ocho de espadas</li>
+      <li class="list-card arcanos-menores espadas"><img class="card-image" src="./images/cartas/nueve_de_espadas.jpg" alt="Nueve de espadas" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Nueve de espadas" data-img="./images/cartas/nueve_de_espadas.jpg" data-text="<p><b>POSITIVO: </b>Preocupación, Angustia, Pesadillas</p><p><b>NEGATIVO: </b>Miedo, Culpa, Obsesión</p>">Nueve de espadas</li>
+      <li class="list-card arcanos-menores espadas"><img class="card-image" src="./images/cartas/diez_de_espadas.jpg" alt="Diez de espadas" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Diez de espadas" data-img="./images/cartas/diez_de_espadas.jpg" data-text="<p><b>POSITIVO: </b>Fin, Dolor, Traición</p><p><b>NEGATIVO: </b>Dolor, Pérdida, Finalización</p>">Diez de espadas</li>
+      <li class="list-card arcanos-menores espadas figuras-corte"><img class="card-image" src="./images/cartas/page_de_espadas.jpg" alt="Page de espadas" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Page de espadas" data-img="./images/cartas/page_de_espadas.jpg" data-text="<p><b>POSITIVO: </b>Nuevo conocimiento, Comunicación, Observación</p><p><b>NEGATIVO: </b>Arrogancia, Impulsividad, Falta de atención</p>">Page de espadas</li>
+      <li class="list-card arcanos-menores espadas figuras-corte"><img class="card-image" src="./images/cartas/caballero_de_espadas.jpg" alt="Caballero de espadas" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Caballero de espadas" data-img="./images/cartas/caballero_de_espadas.jpg" data-text="<p><b>POSITIVO: </b>Acción, Determinación, Coraje</p><p><b>NEGATIVO: </b>Agresividad, Crueldad, Falta de empatía</p>">Caballero de espadas</li>
+      <li class="list-card arcanos-menores espadas figuras-corte"><img class="card-image" src="./images/cartas/reina_de_espadas.jpg" alt="Reina de espadas" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Reina de espadas" data-img="./images/cartas/reina_de_espadas.jpg" data-text="<p><b>POSITIVO: </b>Claridad, Lógica, Independencia</p><p><b>NEGATIVO: </b>Fría, Controladora, Crítica</p>">Reina de espadas</li>
+      <li class="list-card arcanos-menores espadas figuras-corte"><img class="card-image" src="./images/cartas/rey_de_espadas.jpg" alt="Rey de espadas" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Rey de espadas" data-img="./images/cartas/rey_de_espadas.jpg" data-text="<p><b>POSITIVO: </b>Sabiduría, Poder, Verdad</p><p><b>NEGATIVO: </b>Frío, Insensible, Arrogante</p>">Rey de espadas</li>
+      <li class="list-card arcanos-menores copas"><img class="card-image" src="./images/cartas/as_de_copas.jpg" alt="As de copas" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="As de copas" data-img="./images/cartas/as_de_copas.jpg" data-text="<p><b>POSITIVO: </b>Nuevo amor, Felicidad, Alegría</p><p><b>NEGATIVO: </b>Desamor, Insatisfacción, Bloqueo emocional</p>">As de copas</li>
+      <li class="list-card arcanos-menores copas"><img class="card-image" src="./images/cartas/dos_de_copas.jpg" alt="Dos de copas" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Dos de copas" data-img="./images/cartas/dos_de_copas.jpg" data-text="<p><b>POSITIVO: </b>Amor, Unión, Compromiso</p><p><b>NEGATIVO: </b>Desacuerdo, Separación, Desunión</p>">Dos de copas</li>
+      <li class="list-card arcanos-menores copas"><img class="card-image" src="./images/cartas/tres_de_copas.jpg" alt="Tres de copas" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Tres de copas" data-img="./images/cartas/tres_de_copas.jpg" data-text="<p><b>POSITIVO: </b>Celebración, Amistad, Comunidad</p><p><b>NEGATIVO: </b>Soledad, Aislamiento, Envidia</p>">Tres de copas</li>
+      <li class="list-card arcanos-menores copas"><img class="card-image" src="./images/cartas/cuatro_de_copas.jpg" alt="Cuatro de copas" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Cuatro de copas" data-img="./images/cartas/cuatro_de_copas.jpg" data-text="<p><b>POSITIVO: </b>Meditación, Evaluación, Introspección</p><p><b>NEGATIVO: </b>Aburrimiento, Descontento, Falta de motivación</p>">Cuatro de copas</li>
+      <li class="list-card arcanos-menores copas"><img class="card-image" src="./images/cartas/cinco_de_copas.jpg" alt="Cinco de copas" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Cinco de copas" data-img="./images/cartas/cinco_de_copas.jpg" data-text="<p><b>POSITIVO: </b>Pérdida, Tristeza, Desilusión</p><p><b>NEGATIVO: </b>Dolor, Arrepentimiento, Desesperación</p>">Cinco de copas</li>
+      <li class="list-card arcanos-menores copas"><img class="card-image" src="./images/cartas/seis_de_copas.jpg" alt="Seis de copas" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Seis de copas" data-img="./images/cartas/seis_de_copas.jpg" data-text="<p><b>POSITIVO: </b>Recuerdos, Nostalgia, Gratitud</p><p><b>NEGATIVO: </b>Estancamiento, Imposibilidad de avanzar, Bloqueo emocional</p>">Seis de copas</li>
+      <li class="list-card arcanos-menores copas"><img class="card-image" src="./images/cartas/siete_de_copas.jpg" alt="Siete de copas" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Siete de copas" data-img="./images/cartas/siete_de_copas.jpg" data-text="<p><b>POSITIVO: </b>Opciones, Fantasía, Elección</p><p><b>NEGATIVO: </b>Ilusión, Desenfoque, Engaño</p>">Siete de copas</li>
+      <li class="list-card arcanos-menores copas"><img class="card-image" src="./images/cartas/ocho_de_copas.jpg" alt="Ocho de copas" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Ocho de copas" data-img="./images/cartas/ocho_de_copas.jpg" data-text="<p><b>POSITIVO: </b>Crecimiento, Abandono, Viaje interior</p><p><b>NEGATIVO: </b>Tristeza, Despedida, Pérdida</p>">Ocho de copas</li>
+      <li class="list-card arcanos-menores copas"><img class="card-image" src="./images/cartas/nueve_de_copas.jpg" alt="Nueve de copas" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Nueve de copas" data-img="./images/cartas/nueve_de_copas.jpg" data-text="<p><b>POSITIVO: </b>Satisfacción, Felicidad, Éxito</p><p><b>NEGATIVO: </b>Arrogancia, Exceso, Vanidad</p>">Nueve de copas</li>
+      <li class="list-card arcanos-menores copas"><img class="card-image" src="./images/cartas/diez_de_copas.jpg" alt="Diez de copas" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Diez de copas" data-img="./images/cartas/diez_de_copas.jpg" data-text="<p><b>POSITIVO: </b>Amor, Felicidad, Armonía</p><p><b>NEGATIVO: </b>Desacuerdo, Desunión, Dificultades familiares</p>">Diez de copas</li>
+      <li class="list-card arcanos-menores copas figuras-corte"><img class="card-image" src="./images/cartas/page_de_copas.jpg" alt="Page de copas" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Page de copas" data-img="./images/cartas/page_de_copas.jpg" data-text="<p><b>POSITIVO: </b>Inspiración, Creatividad, Sensibilidad</p><p><b>NEGATIVO: </b>Inmadurez, Falta de compromiso, Irracionalidad</p>">Page de copas</li>
+      <li class="list-card arcanos-menores copas figuras-corte"><img class="card-image" src="./images/cartas/caballero_de_copas.jpg" alt="Caballero de copas" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Caballero de copas" data-img="./images/cartas/caballero_de_copas.jpg" data-text="<p><b>POSITIVO: </b>Romance, Empatía, Generosidad</p><p><b>NEGATIVO: </b>Inestabilidad emocional, Falta de compromiso, Drama</p>">Caballero de copas</li>
+      <li class="list-card arcanos-menores copas figuras-corte"><img class="card-image" src="./images/cartas/reina_de_copas.jpg" alt="Reina de copas" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Reina de copas" data-img="./images/cartas/reina_de_copas.jpg" data-text="<p><b>POSITIVO: </b>Compasión, Empatía, Intuición</p><p><b>NEGATIVO: </b>Melancolía, Excesiva emotividad, Falta de límites</p>">Reina de copas</li>
+      <li class="list-card arcanos-menores copas figuras-corte"><img class="card-image" src="./images/cartas/rey_de_copas.jpg" alt="Rey de copas" data-bs-toggle="modal" data-bs-target="#exampleModal" data-title="Rey de copas" data-img="./images/cartas/rey_de_copas.jpg" data-text="<p><b>POSITIVO: </b>Sabiduría emocional, Generosidad, Compatibilidad</p><p><b>NEGATIVO: </b>Manipulación emocional, Falta de madurez, Depresión</p>">Rey de copas</li>
+      
+  </ol>
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script>
+
+
+
+
+ $(document).ready(function () {
+  // Coloca la varibla count en 0 que es utilizada para las funciones de Barajeo
+  var count = 0;
+  // Oculta elemntos al entrar a la pagina o actualizarla
+  document.getElementById("selectCard").style.display = "none";
+  document.getElementById("root").style.display = "none";
+  document.getElementById("chosenCardContainer").style.display = "none";
+  
+  /*** BARAJEO***/
+
+  //Barajeo al dar click sobre las cartas
+$(".tarot-card").click(function() {
+  var card = $(this);
+  if(count < 4) {
+
+   $(this).removeClass("top").addClass("bottom");
+    
+    count++;
+  }
+  if(count == 4) {
+   $("div").removeClass("bottom");
+    
+    count = 0;
+  }
+  shuffle(card);
+});
+});
+
+
+// Mueve la carta
+function shuffle(card) {
+    TweenLite.fromTo(
+        card, 
+        0.6, 
+        {
+        x:410, 
+        y:-15, 
+        ease: Expo.easeOut}, 
+        {
+        x:0,
+        y:0,
+        ease: Expo.easeIn});
+};
+
+// Al dar click en barajar limpia todo y mueve todas las cartas
+    function barajearCartas() {
+    
+    cardIndex = 0; // Reiniciar el índice
+
+      shuffleCards();
+
+    // Cambiar la imagen de la carta a la imagen de la carta trasera
+    document.getElementById("card").src = "./images/cartas/trasera_rider.jpg";
+    document.getElementById("card-name").style.display = "none";
+    document.getElementById("card-meaning").style.display= "none";
+    document.getElementById("selectCard").style.display = "none";
+document.getElementById("root").style.display = "none";
+document.getElementById("extendCards").style.display = "inline";
+document.getElementById("tarotImgContainer").style.display = "block";
+document.getElementById("chosenCardContainer").style.display = "none";
+
+
+    }
+
+    var cardIndex = 0; // Índice de la carta actual
+// Mueve todas las cartas
+function shuffleCards() {
+  var cards = $(".tarot-card");
+
+  if (cardIndex < cards.length) {
+    var currentCard = cards.eq(cardIndex); // Obtener la carta actual
+
+    shuffle(currentCard); // Aplicar el efecto de movimiento
+
+    cardIndex++; // Incrementar el índice para la siguiente carta
+
+    // Esperar un tiempo antes de mover la siguiente carta
+    setTimeout(shuffleCards, 200); // Ajusta el tiempo según la duración de la animación de TweenLite
+  }
+}
+
+
+/****EXTENDER CARTAS****/
+
+function spreadCards(){
+
+document.getElementById("selectCard").style.display = "inline";
+document.getElementById("root").style.display = "block";
+document.getElementById("tarotImgContainer").style.display = "none";
+document.getElementById("extendCards").style.display = "none";
+//document.getElementsByClassName("tarot-card").style.display = "inline";
+
+
+// Variables
+let NUM_CARDS = 14;
+let SPACING = 50;
+let BOW = 20;
+let spreadCards = [];
+let root = document.getElementById('root');
+var tarotUrl = './images/cartas/trasera_rider.jpg' ;
+
+for (let i = 0; i < NUM_CARDS; i++) {
+  let card = document.createElement('div');
+  //Container offsets each individual card
+  let cardCont = document.createElement('div');
+  card.className = 'card';
+  cardCont.className = 'card-cont';
+  //Spacing them out left to right
+  cardCont.style.left = (i*SPACING)+'px';
+  //Bow effect
+  cardCont.style.top = (-Math.sin(i/Math.PI)*BOW)+'px';
+  card.onclick = () => {
+    showCard()
+    /*
+    let detailRevealed = detailCard.classList.contains('revealed');
+    cards.forEach(c => c.classList.remove('flipped'));
+    detailCard.classList.toggle('revealed');
+    if (!detailRevealed) this.classList.add('flipped');
+    */
+  };
+  let image = document.createElement('img');
+  image.src = tarotUrl;
+  card.appendChild(image);
+  spreadCards.push(card);
+  cardCont.appendChild(card);
+  root.appendChild(cardCont);
+}
+/*
+let detailCard = document.getElementById('detail-card');
+detailCard.onclick = () => {
+  detailCard.classList.remove('revealed');
+  card.forEach(c => c.classList.remove('flipped'));
+}
+
+*/
+
+
+}
+
+
+
+
+// Funcion para el boton de sacar carta o al dar click en la carta selecionada
+function showCard() {
+      // Seleccionar una carta aleatoria del array de cartas
+      var randomCardIndex = Math.floor(Math.random() * cards.length);
+      var randomCard = cards[randomCardIndex];
+
+      // Mostrar el nombre de la carta encima de la imagen
+      document.getElementById("card-name").innerHTML = randomCard.name;
+      document.getElementById("card-name").style.display = "block";
+      // Mostrar la imagen y el significado de la carta seleccionada
+      document.getElementById("chosenCard").src = randomCard.image;
+      document.getElementById("chosenCard").alt = randomCard.name;
+      document.getElementById("chosenCard").style.display = "block";
+      document.getElementById("card-meaning").innerHTML = randomCard.meaning;
+      document.getElementById("card-meaning").style.display= "block";
+
+      document.getElementById("selectCard").style.display = "none";
+      document.getElementById("root").style.display = "none";
+      //document.getElementById("tarotImgContainer").style.display = "block"; // Con esta linea se muestran las cartas atras como si estuviera encima de todas
+      document.getElementById("extendCards").style.display = "none";
+      document.getElementById("chosenCardContainer").style.display = "block";;
+    }
+
+
+// Funcion Que filta las cartas y significados
+function filtrarCartas() {
+    var filtro = document.getElementById("filtro-cartas").value;
+    var todasLasCartas = document.getElementsByClassName("list-card");
+    var arcanosMayores = document.getElementsByClassName("arcanos-mayores");
+    var arcanosMenores = document.getElementsByClassName("arcanos-menores");
+    var arcanosOros = document.getElementsByClassName("oros");
+    var arcanosBastos = document.getElementsByClassName("bastos");
+    var arcanosEspadas = document.getElementsByClassName("espadas");
+    var arcanosCopas = document.getElementsByClassName("copas");
+    var arcanosFigurasCorte = document.getElementsByClassName("figuras-corte");
+
+    if (filtro == "todas") {
+        // Mostrar todas las cartas
+        for (var i = 0; i < todasLasCartas.length; i++) {
+            todasLasCartas[i].style.display = "flex";
+        }
+    } else if (filtro == "arcanos-mayores") {
+        // Ocultar todas las cartas
+        for (var i = 0; i < todasLasCartas.length; i++) {
+            todasLasCartas[i].style.display = "none";
+        }
+        // Mostrar solo los arcanos mayores
+        for (var i = 0; i < arcanosMayores.length; i++) {
+            arcanosMayores[i].style.display = "flex";
+        }
+    } else if (filtro == "arcanos-menores") {
+        // Ocultar todas las cartas
+        for (var i = 0; i < todasLasCartas.length; i++) {
+            todasLasCartas[i].style.display = "none";
+        }
+        // Mostrar solo los arcanos mayores
+        for (var i = 0; i < arcanosMenores.length; i++) {
+            arcanosMenores[i].style.display = "flex";
+        }
+    } else if (filtro == "oros") {
+        // Ocultar todas las cartas
+        for (var i = 0; i < todasLasCartas.length; i++) {
+            todasLasCartas[i].style.display = "none";
+        }
+        // Mostrar solo los arcanos mayores
+        for (var i = 0; i < arcanosOros.length; i++) {
+            arcanosOros[i].style.display = "flex";
+        }
+    } else if (filtro == "bastos") {
+        // Ocultar todas las cartas
+        for (var i = 0; i < todasLasCartas.length; i++) {
+            todasLasCartas[i].style.display = "none";
+        }
+        // Mostrar solo los arcanos mayores
+        for (var i = 0; i < arcanosBastos.length; i++) {
+            arcanosBastos[i].style.display = "flex";
+        }
+    } else if (filtro == "espadas") {
+        // Ocultar todas las cartas
+        for (var i = 0; i < todasLasCartas.length; i++) {
+            todasLasCartas[i].style.display = "none";
+        }
+        // Mostrar solo los arcanos mayores
+        for (var i = 0; i < arcanosEspadas.length; i++) {
+            arcanosEspadas[i].style.display = "flex";
+        }
+    } else if (filtro == "copas") {
+        // Ocultar todas las cartas
+        for (var i = 0; i < todasLasCartas.length; i++) {
+            todasLasCartas[i].style.display = "none";
+        }
+        // Mostrar solo los arcanos mayores
+        for (var i = 0; i < arcanosCopas.length; i++) {
+            arcanosCopas[i].style.display = "flex";
+        }
+    } else if (filtro == "figuras-corte") {
+        // Ocultar todas las cartas
+        for (var i = 0; i < todasLasCartas.length; i++) {
+            todasLasCartas[i].style.display = "none";
+        }
+        // Mostrar solo los arcanos mayores
+        for (var i = 0; i < arcanosFigurasCorte.length; i++) {
+            arcanosFigurasCorte[i].style.display = "flex";
+        }
+    } 
+    
+    else {
+        // Mostrar todas las cartas si no se selecciona ninguna opción específica
+        for (var i = 0; i < todasLasCartas.length; i++) {
+            todasLasCartas[i].style.display = "flex";
+        }
+    }
+}
+
+
+
+
+//Modal
+
+// Arreglo de cartas para el modal
+var cards = [
+      { name: "El Mago", image: "./images/cartas/el_mago.jpg", meaning: "Representa la creatividad, la habilidad y la confianza en uno mismo." },
+      { name: "La Sacerdotisa", image: "./images/cartas/la_sacerdotisa.jpg", meaning: "Representa la intuición, el conocimiento y el secreto." },
+      { name: "La Emperatriz", image: "./images/cartas/la_emperatriz.jpg", meaning: "Representa la fertilidad, la abundancia y la protección." },
+      // Agregar los otros 75 objetos que representan cada carta de Tarot
+      { name: "El Mundo", image: "./images/cartas/el_mundo.jpg", meaning: "Representa la realización, la culminación y el éxito." }
+    ];
+
+(function() {
+  // Cierra el modal al hacer clic en el botón de cerrar
+  (".btn-close").click(function() {
+    ("#exampleModal").modal("hide");
+  });
+
+  // Cierra el modal al hacer clic en el botón de Cancelar
+  (".btn-secondary").click(function() {
+  ("#exampleModal").modal("hide");
+  });
+});
+
+
+// Funciones para mostrar los significados utilizando los radios en el modal
+
+const opcion1 = document.getElementById("opcion1");
+const opcion2 = document.getElementById("opcion2");
+const opcion3 = document.getElementById("opcion3");
+const textoSeleccionado = document.getElementById("texto-seleccionado");
+
+opcion1.addEventListener("click", function() {
+   if (opcion1.checked) {
+    textoSeleccionado.innerHTML = "Significado 1.  Representa la creatividad, la habilidad y la confianza en uno mismo.";
+    opcion2.checked = false;
+    opcion3.checked = false;
+  } else {
+    textoSeleccionado.innerHTML = "";
+  }
+});
+
+opcion2.addEventListener("click", function() {
+  if (opcion2.checked) {
+    textoSeleccionado.innerHTML = "Significado 2. Representa la intuición, el conocimiento y el secreto.";
+    opcion1.checked = false;
+    opcion3.checked = false;
+  } else {
+    textoSeleccionado.innerHTML = "";
+  }
+});
+
+opcion3.addEventListener("click", function() {
+  if (opcion3.checked) {
+    textoSeleccionado.innerHTML = "Significado 3. Representa la fertilidad, la abundancia y la protección.";
+    opcion1.checked = false;
+    opcion2.checked = false;
+  } else {
+    textoSeleccionado.innerHTML = "";
+  }
+});
+
+// funcion que hace que el modal tome los datos de la imagen a la que hace click
+$('img').on('click', function() {
+  const modalTitle = $(this).attr('data-title');
+  const modalImg = $(this).attr('data-img');
+  const modalText = $(this).attr('data-text');
+  $('#modal-title').html(modalTitle);
+  $('#image-signidicado').attr('src', modalImg);
+  $('#texto-seleccionado').html(modalText);
+});
+
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>

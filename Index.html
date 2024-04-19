@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<head>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+  <header>
+    <h1>AstroRosh</h1>
+    <nav>
+      <ul>
+        <li><a href="Tarot_Rosh.html" >Tarot</a></li>
+        <li><a href="Astrologia_Rosh.html" >Astrología</a></li>
+        <li><a href="#acerca" >Acerca de</a></li>
+        <li><a href="#blog" >Blog</a></li>
+        <li><a href="#contacto" >Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="acerca">
+    <h2>Bienvenido(a)</h2>
+    <p>¡Hola! Soy Rosh y quiero darte la bienvenida a mi sitio web. Aquí podrás encontrar información sobre los servicios de tarot y astrología que ofrezco y cómo pueden ayudarte a obtener un mayor conocimiento de ti mismo y de tu entorno.
+
+      Tanto el tarot como la astrología son herramientas poderosas que pueden guiarte en tu camino de autoconocimiento y descubrimiento personal. Mi objetivo es ayudarte a comprender mejor tu situación actual y brindarte las herramientas que necesitas para tomar decisiones informadas y alcanzar tus metas.
+      
+      Te invito a explorar mi sitio web y conocer más sobre mis servicios. Si tienes alguna pregunta, no dudes en contactarme. Estoy aquí para ayudarte en tu camino hacia el autoconocimiento y la realización personal.</p>
+  </section>
+
+
+  <section id="servicios-tarot" class="tarot-background">
+    <div class="servicios-img"></div>
+    <div class="servicios-texto">
+      <h2>Tarot</h2>
+      <p>"Mi enfoque en la lectura del Tarot es para el autoconocimiento y el crecimiento personal. A través de una lectura personalizada y profunda, podemos descubrir juntos las claves para entender nuestro presente y futuro, y así tomar decisiones informadas y conscientes. Utilizo una combinación de intuición, conocimiento simbólico y experiencia en el tarot para guiarte en el camino de la exploración personal. En mis servicios de Tarot, ofrezco diferentes tipos de lecturas, desde una lectura rápida de 15 minutos para una pregunta específica hasta una lectura completa para una comprensión más profunda de ti mismo y tu vida. ¡Permíteme acompañarte en tu viaje de auto-descubrimiento a través del Tarot!"</p>
+      <a href="Tarot_Rosh.html">Conoce mas...</a>
+    </div>
+  </section>
+
+  <section id="servicios-astrologia" class="astro-background">
+    <div class="servicios-img"></div>
+    <div class="servicios-texto">
+      <h2>Astrología</h2>
+      <p>"En la sección de Astrología, ofrezco lecturas de carta natal y revolución solar. Mi enfoque es ayudarte a descubrir y comprender tu propia naturaleza y los patrones en tu vida que se reflejan en los planetas y en sus aspectos en tu carta astral. La astrología es una herramienta poderosa para el autoconocimiento y para comprender el momento actual de tu vida. Durante la sesión, exploraremos juntos tus características innatas, tu potencial y los desafíos que puedes enfrentar, siempre enfocados en el objetivo de ayudarte a alcanzar una mayor comprensión de ti mismo y tu entorno."</p>
+      <a href="Astrologia_Rosh.html">Conoce mas...</a>
+    </div>
+  </section>
+
+
+
+  <section id="contacto">
+    <h2>Contacto</h2>
+    <p>Para programar una lectura de tarot o astrología, o si tienes alguna pregunta, envía un mensaje a través del formulario a continuación</p>
+    <div class="contacto-container">
+      <div class="contacto-form-container">
+        <form method="POST" action="https://script.google.com/macros/s/AKfycbyJDp70Do7DnnAfQM0lAyYO6-hlD9HZkbXvXHYP1SHn0R9T9l1gsrs6waLIHrOCUfj2pw/exec">
+          <label for="nombre">Nombre:</label>
+          <input type="text" id="nombre" name="nombre" required>
+          <label for="correo">Correo electrónico:</label>
+          <input type="email" id="correo" name="correo" required>
+          <label for="asunto">Asunto:</label>
+          <input type="text" id="asunto" name="asunto" required>
+          <label for="mensaje">Mensaje:</label>
+          <textarea id="mensaje" name="mensaje" required></textarea>
+          <button type="submit">Enviar</button>
+        </form>
+        <div id="contacto-shortcuts">
+          <a href="https://wa.me/1234567890">
+            <i class="fab fa-whatsapp"></i>
+            <span>WhatsApp</span>
+          </a>
+          <a href="https://m.me/1234567890">
+            <i class="fab fa-facebook-messenger"></i>
+            <span>Messenger</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  <script>
+    const tarotSection = document.getElementById("servicios-tarot");
+    const astroSection = document.getElementById("servicios-astrologia");
+    const body = document.body;
+    
+    tarotSection.addEventListener("mouseover", () => {
+      body.classList.add("tarot-background");
+      tarotSection.addEventListener("click", () => {
+      window.location.href = "Tarot_Rosh.html"; 
+});
+    });
+    tarotSection.addEventListener("mouseout", () => {
+      body.classList.remove("tarot-background");
+    });
+    
+    astroSection.addEventListener("mouseover", () => {
+          body.classList.add("astro-background");
+          astroSection.addEventListener("click", () => {
+      window.location.href = "Astrologia_Rosh.html"; 
+    });
+  });
+    astroSection.addEventListener("mouseout", () => {
+      body.classList.remove("astro-background");
+    });
+
+      </script>
+
+  <footer>
+    <p>Derechos de autor © 2023 AstroRosh. Todos los derechos reservados.</p>
+  </footer>
